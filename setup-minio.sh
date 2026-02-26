@@ -31,8 +31,7 @@ else
   sudo mkdir -p "$MOUNT_POINT"
 fi
 
-curl --progress-bar -L dl.min.io/aistor/minio/release/linux-amd64/minio.deb -o minio.deb
-sudo dpkg -i minio.deb
+sudo dpkg -i /local/minio.deb
 
 echo "$LICENSE" >/minio.license
 
