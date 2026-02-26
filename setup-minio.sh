@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # CloudLab Parameters
 LICENSE=$1
 ROOT_USER=$2
@@ -46,8 +47,8 @@ MINIO_LICENSE="/local/minio.license"
 EOF
 
 sudo mkdir -p /opt/minio
-chown -R minio-user:minio-user /opt/minio/
-chown -R minio-user:minio-user "$MOUNT_POINT"
+sudo chown -R minio-user:minio-user /opt/minio/
+sudo chown -R minio-user:minio-user "$MOUNT_POINT"
 
 sudo systemctl enable minio.service
 sudo systemctl start minio
