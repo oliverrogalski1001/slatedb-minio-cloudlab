@@ -45,6 +45,7 @@ MINIO_ROOT_PASSWORD="${ROOT_PASS}"
 MINIO_LICENSE="/minio.license"
 EOF
 
+sudo mkdir -p /opt/minio
 chown -R minio-user:minio-user /opt/minio/
 chown -R minio-user:minio-user "$MOUNT_POINT"
 
