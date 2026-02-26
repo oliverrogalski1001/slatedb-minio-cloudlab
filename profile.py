@@ -30,7 +30,7 @@ if params.raw_node_type != "":
 
 node.addService(
     rspec.Execute(
-        shell="bash",
+        shell="sh",
         command="/local/repository/setup-minio.sh '{}' '{}' '{}'".format(
             params.minio_license, params.minio_root_user, params.minio_root_password
         ),

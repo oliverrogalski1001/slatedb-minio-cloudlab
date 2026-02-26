@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 # CloudLab Parameters
 LICENSE=$1
