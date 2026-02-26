@@ -29,11 +29,6 @@ if params.raw_node_type != "":
     node.hardware_type = params.raw_node_type
 
 node.addService(
-    rspec.Install(
-        url="dl.min.io/aistor/minio/release/linux-amd64/minio.deb", path="/local"
-    )
-)
-node.addService(
     rspec.Execute(
         shell="bash",
         command="chmod +x /local/repository/setup-minio.sh && /local/repository/setup-minio.sh '{}' '{}' '{}'".format(
