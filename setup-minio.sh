@@ -7,6 +7,8 @@ ROOT_PASS=$3
 TARGET_DEV="/dev/sdb"
 MOUNT_POINT="/mnt/minio"
 
+echo "$LICENSE" >/local/minio.license
+
 if [ -b "$TARGET_DEV" ]; then
   echo "Formatting $TARGET_DEV..."
   # Create a single partition using the whole disk
@@ -31,10 +33,8 @@ else
   sudo mkdir -p "$MOUNT_POINT"
 fi
 
-curl -L dl.min.io/aistor/minio/release/linux-amd64/minio.deb -o /local/minio.deb
+sudo curl -L dl.min.io/aistor/minio/release/linux-amd64/minio.deb -o /local/minio.deb
 sudo dpkg -i /local/minio.deb
-
-echo "$LICENSE" >/minio.license
 
 cat <<EOF | sudo tee /etc/default/minio
 MINIO_VOLUMES="$MOUNT_POINT"
@@ -42,7 +42,7 @@ MINIO_VOLUMES="$MOUNT_POINT"
 MINIO_ROOT_USER="${ROOT_USER}"
 MINIO_ROOT_PASSWORD="${ROOT_PASS}"
 
-MINIO_LICENSE="/minio.license"
+MINIO_LICENSE="/local/minio.license"
 EOF
 
 sudo mkdir -p /opt/minio
