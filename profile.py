@@ -16,7 +16,7 @@ pc.defineParameter(
     "minio_root_user", "Root Username", portal.ParameterType.STRING, "minioadmin"
 )
 pc.defineParameter(
-    "minio_root_password", "Root Password", portal.ParameterType.PASSWORD, "minioadmin"
+    "minio_root_password", "Root Password", portal.ParameterType.STRING, "minioadmin"
 )
 
 params = pc.bindParameters()
