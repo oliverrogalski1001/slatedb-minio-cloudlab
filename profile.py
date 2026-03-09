@@ -1,3 +1,9 @@
+"""Two-node CloudLab profile for benchmarking SlateDB with MinIO as the object store.
+
+Sets up a MinIO server node and a SlateDB client node connected via a dedicated link.
+The SlateDB node automatically configures credentials and creates a bucket on the MinIO node.
+"""
+
 import geni.portal as portal
 import geni.rspec.pg as rspec
 
