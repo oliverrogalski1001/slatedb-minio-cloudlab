@@ -9,6 +9,22 @@ MINIO_BUCKET=$5
 
 MINIO_ENDPOINT="http://${MINIO_IP}:9000"
 
+# Wait for internet connectivity before proceeding
+echo "Checking for internet connectivity..."
+MAX_RETRIES=30
+RETRY_INTERVAL=10
+attempt=0
+while ! curl -s --max-time 5 -o /dev/null https://sh.rustup.rs; do
+  attempt=$((attempt + 1))
+  if [ "$attempt" -ge "$MAX_RETRIES" ]; then
+    echo "ERROR: No internet connectivity after $MAX_RETRIES attempts. Aborting."
+    exit 1
+  fi
+  echo "No internet connection (attempt $attempt/$MAX_RETRIES). Retrying in ${RETRY_INTERVAL}s..."
+  sleep "$RETRY_INTERVAL"
+done
+echo "Internet connectivity confirmed."
+
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 

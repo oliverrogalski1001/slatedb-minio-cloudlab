@@ -8,6 +8,22 @@ ROOT_PASS=$3
 TARGET_DEV="/dev/sdb"
 MOUNT_POINT="/mnt/minio"
 
+# Wait for internet connectivity before proceeding
+echo "Checking for internet connectivity..."
+MAX_RETRIES=30
+RETRY_INTERVAL=10
+attempt=0
+while ! curl -s --max-time 5 -o /dev/null https://dl.min.io; do
+  attempt=$((attempt + 1))
+  if [ "$attempt" -ge "$MAX_RETRIES" ]; then
+    echo "ERROR: No internet connectivity after $MAX_RETRIES attempts. Aborting."
+    exit 1
+  fi
+  echo "No internet connection (attempt $attempt/$MAX_RETRIES). Retrying in ${RETRY_INTERVAL}s..."
+  sleep "$RETRY_INTERVAL"
+done
+echo "Internet connectivity confirmed."
+
 echo "$LICENSE" >/local/minio.license
 
 if [ -b "$TARGET_DEV" ]; then
