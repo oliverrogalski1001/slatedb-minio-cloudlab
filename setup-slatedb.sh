@@ -47,6 +47,7 @@ mc mb "myminio/${MINIO_BUCKET}" --ignore-existing
 
 # write .env
 cat <<EOF >~/.env
+CLOUD_PROVIDER=aws
 AWS_ACCESS_KEY_ID=${MINIO_USER}
 AWS_SECRET_ACCESS_KEY=${MINIO_PASS}
 AWS_REGION=us-east-1
