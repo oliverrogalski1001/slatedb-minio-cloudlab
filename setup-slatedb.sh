@@ -29,12 +29,12 @@ echo "Internet connectivity confirmed."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # clone slatedb repo
-git clone $SLATEDB_REPO
+git clone $SLATEDB_REPO ~/slatedb
 
 # install minio client
-wget https://dl.min.io/aistor/mc/release/linux-amd64/mc -o mc
-chmod +x ./mc
-mv ./mc /usr/local/bin/
+wget https://dl.min.io/aistor/mc/release/linux-amd64/mc -O mc
+sudo chmod +x ./mc
+sudo mv ./mc /usr/local/bin/
 
 # wait for minio to be ready
 echo "Waiting for MinIO at ${MINIO_ENDPOINT}..."
@@ -46,7 +46,7 @@ done
 mc mb "myminio/${MINIO_BUCKET}" --ignore-existing
 
 # write .env
-cat <<EOF >.env
+cat <<EOF >~/.env
 AWS_ACCESS_KEY_ID=${MINIO_USER}
 AWS_SECRET_ACCESS_KEY=${MINIO_PASS}
 AWS_REGION=us-east-1
